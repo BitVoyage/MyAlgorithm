@@ -8,6 +8,21 @@ struct Node{
     Position next;
 };
 
+List Initial(){
+    List L;
+    Position P = L;
+    int N,X;
+    L = MakeEmpty(L);
+    printf("Enter the number of elements\n");
+    scanf("%d",&N);
+    printf("Enter elements\n");
+    for(int i = 0; i < N; i++){
+        scanf("%d",&X);
+        P =  Insert(X,L,P);
+    }
+    return L;
+}
+
 List
 MakeEmpty(List L){
     L->next = NULL;
@@ -61,19 +76,19 @@ FindPrevious(int X, List L){
 /* Insert after Position P
  * Parameter L is unused in this implementation
  * */
-void
+Position
 Insert(int X, List L, Position P){
     Position tmpCell;
     tmpCell = malloc(sizeof(struct Node));
     if(tmpCell == NULL){
         printf("out of space");
-        return;
     }
-    if(P != NULL){
+    else if(P != NULL){
         tmpCell->element = X;
         tmpCell->next = P->next;
         P->next = tmpCell;
     }
+    return tmpCell;
 }
 
 void
@@ -85,4 +100,20 @@ DeleteList(List L){
         free(P);
         P = tmp->next;
     }
+}
+
+Position Header(List L){
+    return L;
+}
+
+Position First(List L){
+    return L->next;
+}
+
+Position Advance(Position P){
+    return P->next;
+}
+
+int Retrieve(Position P){
+    return P->element;
 }
