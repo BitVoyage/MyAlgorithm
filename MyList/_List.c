@@ -8,8 +8,17 @@ struct Node{
     Position next;
 };
 
-List Initial(){
+/* create header */
+List CreateList(){
     List L;
+    L = malloc(sizeof(struct Node));
+    if(L == NULL) return NULL;
+    L->next = NULL;
+    L->element = 0;
+    return L;
+}
+
+List InitList(List L){
     Position P = L;
     int N,X;
     L = MakeEmpty(L);
@@ -25,7 +34,8 @@ List Initial(){
 
 List
 MakeEmpty(List L){
-    L->next = NULL;
+    if(!IsEmpty(L))
+        free(L->next);
     return L;
 }
 
@@ -102,6 +112,7 @@ DeleteList(List L){
     }
 }
 
+/**** Hide implementation details *****/
 Position Header(List L){
     return L;
 }
@@ -117,3 +128,16 @@ Position Advance(Position P){
 int Retrieve(Position P){
     return P->element;
 }
+/*****  End Hide                 ******/
+
+void
+PrintList(List L){
+    Position P = L->next;
+    printf("List elements:");
+    while(P != NULL){
+        printf(" %d",P->element);
+        P = P->next;
+    }
+    printf("\n");
+}
+
