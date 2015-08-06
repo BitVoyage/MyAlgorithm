@@ -1,0 +1,1 @@
+int ReadArray(int *array);
